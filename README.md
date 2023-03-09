@@ -2,6 +2,7 @@
 Replika AI chat Bot web scraping engine
 
 ## TODO: 
-- Auto log-in
-- Don't open firefox, do the connection without necessity of opening web browser
-- Detect when Replika AI responds with more than one message and prompt those n messages.
+- #1 Auto log-in
+- #2 Don't open firefox, do the connection without necessity of opening web browser
+- #3 Detect when Replika AI responds with more than one message and prompt those n messages.
+- #4 Show images as URL links.
