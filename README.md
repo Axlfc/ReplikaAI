@@ -18,8 +18,8 @@ Run in the repository folder:
 
 ## GNU/Linux
 
-<code>python main.py</code>
+<code>python replika.py</code>
 
 ## Windows
 
-<code>python3 main.py</code>
+<code>python3 replika.py</code>
