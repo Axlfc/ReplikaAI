@@ -6,6 +6,11 @@ Replika AI chat Bot in your terminal
 - Install python3
 - Install python3 dependencies:
 
+## GNU/Linux
+
+<code>pip3 install colorama python-dotenv selenium</code>
+
+## Windows
 <code>pip install colorama python-dotenv selenium</code>
 
 # Usage:
