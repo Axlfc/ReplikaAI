@@ -1,6 +1,20 @@
 # ReplikaAI
 Replika AI chat Bot in your terminal
 
-## TODO:
-- #1 Detect when Replika AI responds with more than one message and prompt those n messages.
-- #2 Show images as URL links.
+# How to set up dependencies:
+- Install Mozilla Firefox
+- Install python3
+- Install python3 dependencies:
+
+<code>pip install colorama python-dotenv selenium</code>
+
+# Usage:
+Run in the repository folder:
+
+## GNU/Linux
+
+<code>python main.py</code>
+
+## Windows
+
+<code>python3 main.py</code>
