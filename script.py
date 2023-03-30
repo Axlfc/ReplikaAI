@@ -2,6 +2,8 @@ import os
 import sys
 import time
 import colorama
+from selenium.common import NoSuchElementException
+
 import process_system
 from dotenv import load_dotenv
 from datetime import datetime
@@ -76,6 +78,80 @@ except:
 time.sleep(5)
 
 
+def replika():
+    initial_time = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
+    while True:
+        try:
+            # Find the chat input box and send a message
+            input_box = driver.find_element(By.CSS_SELECTOR, 'textarea.TextArea-sc-10kop8p-0')
+            print(colorama.Fore.RED + "Enter your text:" + colorama.Fore.CYAN)
+            message = input()
+            add_message(message, initial_time)
+            if message == "exit" or message == "quit":
+                driver.quit()
+                exit(0)
+
+            input_box.send_keys(message + Keys.RETURN)
+
+            time.sleep(6)
+
+            # Wait for the bot to respond
+            WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'span[aria-live="polite"]')))
+            all_responses = driver.find_elements(By.CSS_SELECTOR, 'span[aria-live="off"]')
+            bot_responses = driver.find_elements(By.CSS_SELECTOR, 'span[aria-live="polite"]')
+
+            bot_text_responses = []
+            for xd in all_responses:
+                bot_text_responses.append(xd.text)
+
+            for response in bot_responses:
+                if response.text == "":
+                    pass
+                else:
+                    print(colorama.Fore.GREEN + response.text)
+                    print(colorama.Fore.RESET)
+                    add_message(response.text, initial_time)
+        except NoSuchElementException:
+            try:
+                time.sleep(4)
+                # Find the image element by its CSS selector
+                image_element = driver.find_elements(By.CSS_SELECTOR, 'img[data-testid="chat-message-image"]')
+                # Get the value of the "src" attribute
+                src = image_element[-1].get_attribute("src")
+
+                # Display the link to the terminal
+                add_message(src, initial_time)
+                print(colorama.Fore.GREEN + src)
+                print(colorama.Fore.RESET)
+
+
+                print(colorama.Fore.RED + "Send another one / Stop:" + colorama.Fore.CYAN)
+                message = input()
+                if message == "Send another one":
+                    driver.find_element(By.XPATH, '//button[text()="Send another one"]').click()
+                    time.sleep(6)
+                else:
+                    driver.find_element(By.XPATH, '//button[text()="Stop"]').click()
+                    print()
+                    time.sleep(6)
+            except:
+                print("ERROR: We do not find the textBox element. Exception:\tNoSuchElementException")
+                pass
+
+        '''if len(bot_responses) > 0:
+            last_bot_response = bot_responses[-1]
+            if last_bot_response.text != "":
+                add_message(last_bot_response.text, initial_time)
+                print(colorama.Fore.GREEN + last_bot_response.text)
+                print(colorama.Fore.RESET)
+
+            if len(bot_responses) > 1:
+                additional_responses = bot_responses[:-1]
+                for response in additional_responses:
+                    if response.text != "":
+                        add_message(response.text, initial_time)'''
+
+
 def add_message(message, initialtime):
     now = datetime.now()
     time = now.strftime("%H-%M-%S")
@@ -93,40 +169,6 @@ def add_message(message, initialtime):
 
     with open(filepath, "a", encoding="utf-8") as f:
         f.write(time.strip() + ": " + message.strip() + "\n")
-
-
-def replika():
-    initial_time = datetime.now().strftime("%m-%d-%Y_%H-%M-%S")
-    while True:
-        # Find the chat input box and send a message
-        input_box = driver.find_element(By.CSS_SELECTOR, 'textarea.TextArea-sc-10kop8p-0')
-        print(colorama.Fore.RED + "Enter your text:" + colorama.Fore.CYAN)
-        message = input()
-        add_message(message, initial_time)
-        if message == "exit" or message == "quit":
-            driver.quit()
-            exit(0)
-
-        input_box.send_keys(message + Keys.RETURN)
-
-        time.sleep(6)
-
-        # Wait for the bot to respond
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CSS_SELECTOR, 'span[aria-live="polite"]')))
-        all_responses = driver.find_elements(By.CSS_SELECTOR, 'span[aria-live="off"]')
-        bot_responses = driver.find_elements(By.CSS_SELECTOR, 'span[aria-live="polite"]')
-
-        bot_text_responses = []
-        for xd in all_responses:
-            bot_text_responses.append(xd.text)
-
-        for response in bot_responses:
-            if response.text == "":
-                pass
-            else:
-                add_message(response.text, initial_time)
-                print(colorama.Fore.GREEN + response.text)
-                print(colorama.Fore.RESET)
 
 
 def main():
