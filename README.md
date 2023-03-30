@@ -1,7 +1,7 @@
 # ReplikaAI
 Replika AI chat Bot in your terminal
 
-# How to set up dependencies:
+# Set up dependencies:
 - Install Mozilla Firefox
 - Install python3
 - Install python3 dependencies:
