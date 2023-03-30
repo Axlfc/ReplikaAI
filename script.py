@@ -2,9 +2,11 @@ import os
 import sys
 import time
 import colorama
+
 from selenium.common import NoSuchElementException
 
-import process_system
+import platform
+
 from dotenv import load_dotenv
 from datetime import datetime
 from selenium import webdriver
@@ -18,7 +20,7 @@ from selenium.webdriver.firefox.service import Service
 load_dotenv()
 # os.environ['MOZ_HEADLESS'] = '1'
 
-if process_system.plat() == "Windows":
+if platform.system() == "Windows":
     firefox_profile_path = os.path.expanduser("~") + os.sep + 'AppData' + os.sep + 'Local' + os.sep + 'Mozilla' + os.sep + 'Firefox' + os.sep + 'Profiles' + os.sep + 'inmersprofile.default-release'
 else:
     firefox_profile_path = os.path.expanduser("~") + "/snap/firefox/common/.mozilla/firefox/inmersprofile.default-release"
@@ -155,7 +157,7 @@ def add_message(message, initialtime):
     date = now.strftime("%Y-%m-%d")
     repo_dir = os.path.join(os.path.abspath(__file__)[:-10].split("\n")[0], "conversations")
 
-    if process_system.plat() == "Windows":
+    if platform.system() == "Windows":
         x = repo_dir + "\\" + date
         filepath = x + "\\" + initialtime + ".txt"
     else:
