@@ -2,8 +2,10 @@
 Replika AI chat Bot in your terminal
 
 # Add your username and passwords inside .env file:
-REPLIKA_CLIENT_EMAIL="my.replika.email@hotmail.es"
-REPLIKA_CLIENT_PASSWORD="myReplikaPassword"
+
+<code>REPLIKA_CLIENT_EMAIL="my.replika.email@hotmail.es"</code>
+
+<code>REPLIKA_CLIENT_PASSWORD="myReplikaPassword"</code>
 
 
 # Set up dependencies:
