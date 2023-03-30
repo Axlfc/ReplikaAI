@@ -1,5 +1,5 @@
-# ReplikaWebScraping
-Replika AI chat Bot web scraping engine
+# ReplikaAI
+Replika AI chat Bot in your terminal
 
 ## TODO: 
 - #1 Auto log-in
