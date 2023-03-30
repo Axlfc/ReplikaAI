@@ -180,6 +180,7 @@ def main():
     if len(sys.argv) == 2:
         try:
             replika(sys.argv[1])
+            time.sleep(2)
             driver.quit()
         except:
             print("CLOSING...")
