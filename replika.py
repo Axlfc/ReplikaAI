@@ -180,12 +180,8 @@ def main():
     if len(sys.argv) == 2:
         try:
             replika(sys.argv[1])
-            time.sleep(2)
+        finally:
             driver.quit()
-        except:
-            print("CLOSING...")
-            driver.quit()
-            exit(1)
     else:
         while True:
             print(colorama.Fore.RED + "Enter your text:" + colorama.Fore.CYAN)
